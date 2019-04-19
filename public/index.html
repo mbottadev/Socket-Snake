@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="form" class="deco">
+        <form id="loginForm"> 
+            <input name="pseudo" type="text">
+            <button type="submit">submit</button>
+        </form>
+    </div>
+    <div id="jeu" class="allPPage" style="visibility:hidden">
+            <a href="index.html" class="homeBtn"><img src="arrow.svg" class="fleche"/></a>
+            <!-- <div id="afficheWinner"></div> -->
+            <div class="containScore" id="color">
+                <h1 id="colorP1"></h1>
+                <h1 id="colorP2"></h1>
+            </div>
+            <div class="containScore">
+                <h1 id="scoreP1"></h1>
+                <h1 id="scoreP2"></h1>
+            </div>
+            <canvas id="cadre" width="900" height="900"></canvas>
+        </div>
+        <!-- <div class="allPPage" id="afficheWinner"></div> -->
+</body>
+</html>
