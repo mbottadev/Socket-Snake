@@ -3,9 +3,9 @@ var socket = io.connect('http://10.20.0.125:4001');
 
 
     window.onload = () => {
-        socket.on('test', (socket)=>{
-            console.log(socket)
-        })
+        // socket.on('test', (socket)=>{
+        //     console.log(socket)
+        // })
         let form = document.getElementById("form");
         let jeu = document.getElementById("jeu");
         let loginForm = document.getElementById("loginForm");
