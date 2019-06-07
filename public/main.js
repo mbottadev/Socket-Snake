@@ -66,8 +66,8 @@ var socket = io.connect('http://10.20.1.90:4001');
             ennemi = checkEnnemi(data.joueurs,socket.id)
             show(self)
             show(ennemi)
-            console.log(self)
-            console.log(ennemi)
+            console.log("test")
+            // console.log(ennemi)
         })
 
 

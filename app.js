@@ -193,8 +193,8 @@ io.on('connection',function(socket){
                 pomme:pomme,
             })
             joueursEnCours.push(joueurs)
-            // joueurs = []
-            setInterval(game,1000/10);
+             //joueurs = []
+            setInterval(game,100);
             
         }
     })
@@ -207,9 +207,9 @@ io.on('connection',function(socket){
     
     function game() {
         if(endGame !== true){
-            Object.keys(joueurs).forEach((Id)=>{
-                joueurs[Id].snake.move()
-                joueurs[Id].snake.retainPos()
+            for(Id=0;Id<joueurs.length;Id++){
+                joueurs[Id].snake.move();
+                joueurs[Id].snake.retainPos();
                 // snakes[serpentId].cornerFever()
                 // snakes[serpentId].checkCollision(snakes, serpentId)
                 
@@ -224,53 +224,53 @@ io.on('connection',function(socket){
                     afficheWinner.style.fontFamily = "'Raleway Dots', cursive";                    
                     endGame = true
                 }            
-            })
+            }
             
-            // socket.emit('tick',{
-                //     joueurs:joueurs,
-                //     pomme:pomme,
-                // })
-                
-            // setInterval(()=>{
-                // }, 1000)
-                
-                // scoreP1.innerText = snakes.p1.queue-1;
-                // scoreP2.innerText = snakes.p2.queue-1;
-                // pomme.newApple()
-                // }
-                // socket.emit('test', 'coucou')
-                socket.emit('tick',{
+            io.sockets.emit('tick',{
                     joueurs:joueurs,
                     pomme:pomme,
                 })
+                console.log(socket.id)
+
+            // setInterval(()=>{
+            //     }, 100)
+                
+            //     // scoreP1.innerText = snakes.p1.queue-1;
+            //     // scoreP2.innerText = snakes.p2.queue-1;
+            //     pomme.newApple()
+                
+            //     socket.emit('tick',{
+            //         joueurs:joueurs,
+            //         pomme:pomme,
+            //     })
                 
             }
-        }}
-            
-        )
-                function keyPush(e,id) {
-                    let direction
-                    if(e === 38 || e === 40 || e === 39 || e === 37){
-                    switch(e) {
-                        case 38:
-                        direction = 'up'
-                    break;
-                    case 40:
-                        direction = 'down'
-                        break;
-                        case 39:
-                            direction = 'right'
-                            break;
-                            case 37:
-                                direction = 'left'
-                                break;
-                            }
-                            
-                            if (joueurs[0].ip == id){
-                                joueurs[0].snake.direction(direction)
-                                console.log(joueurs[0])
-                            } else if (joueurs[1].ip == id){
-                                joueurs[1].snake.direction(direction)
-                            }
-                        } 
         }
+    })
+            
+        
+function keyPush(e,id) {
+    let direction
+    if(e === 38 || e === 40 || e === 39 || e === 37){
+        switch(e) {
+            case 38:
+                direction = 'up'
+            break;
+            case 40:
+                direction = 'down'
+            break;
+            case 39:
+                direction = 'right'
+            break;
+            case 37:
+                direction = 'left'
+            break;
+        }
+            
+        if (joueurs[0].ip == id){
+            joueurs[0].snake.direction(direction)
+        } else if (joueurs[1].ip == id){
+            joueurs[1].snake.direction(direction)
+        }
+    } 
+}
