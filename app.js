@@ -204,8 +204,7 @@ io.on('connection',function(socket){
     socket.on('touche',function(data){
         keyPush(data.key,socket.id)
     })
-
-        
+    
     function game() {
         if(endGame !== true){
             Object.keys(joueurs).forEach((Id)=>{
@@ -214,9 +213,9 @@ io.on('connection',function(socket){
                 // snakes[serpentId].cornerFever()
                 // snakes[serpentId].checkCollision(snakes, serpentId)
                 
-               
+                
                 if (joueurs[Id].snake.queue > 25){
-
+                    
                     afficheWinner.innerText = snakes[serpentId].color + " snake won";
                     afficheWinner.style.backgroundColor = "black";
                     afficheWinner.style.color = snakes[serpentId].color;
@@ -226,52 +225,52 @@ io.on('connection',function(socket){
                     endGame = true
                 }            
             })
-
+            
             // socket.emit('tick',{
-            //     joueurs:joueurs,
-            //     pomme:pomme,
-            // })
-
+                //     joueurs:joueurs,
+                //     pomme:pomme,
+                // })
+                
             // setInterval(()=>{
-            // }, 1000)
-
-            // scoreP1.innerText = snakes.p1.queue-1;
-            // scoreP2.innerText = snakes.p2.queue-1;
-            // pomme.newApple()
-        // }
-        // socket.emit('test', 'coucou')
-        socket.emit('tick',{
-            joueurs:joueurs,
-            pomme:pomme,
-        })
-
-    }
-        
-    function keyPush(e,id) {
-        let direction
-        if(e === 38 || e === 40 || e === 39 || e === 37){
-                switch(e) {
-                case 38:
-                    direction = 'up'
-                break;
-                case 40:
-                    direction = 'down'
-                break;
-                case 39:
-                    direction = 'right'
-                break;
-                case 37:
-                    direction = 'left'
-                break;
+                // }, 1000)
+                
+                // scoreP1.innerText = snakes.p1.queue-1;
+                // scoreP2.innerText = snakes.p2.queue-1;
+                // pomme.newApple()
+                // }
+                // socket.emit('test', 'coucou')
+                socket.emit('tick',{
+                    joueurs:joueurs,
+                    pomme:pomme,
+                })
+                
             }
-
-            if (joueurs[0].ip == id){
-                joueurs[0].snake.direction(direction)
-                console.log(joueurs[0])
-            } else if (joueurs[1].ip == id){
-                joueurs[1].snake.direction(direction)
-            }
-        } 
-    }
-}
-})
+        }}
+            
+        )
+                function keyPush(e,id) {
+                    let direction
+                    if(e === 38 || e === 40 || e === 39 || e === 37){
+                    switch(e) {
+                        case 38:
+                        direction = 'up'
+                    break;
+                    case 40:
+                        direction = 'down'
+                        break;
+                        case 39:
+                            direction = 'right'
+                            break;
+                            case 37:
+                                direction = 'left'
+                                break;
+                            }
+                            
+                            if (joueurs[0].ip == id){
+                                joueurs[0].snake.direction(direction)
+                                console.log(joueurs[0])
+                            } else if (joueurs[1].ip == id){
+                                joueurs[1].snake.direction(direction)
+                            }
+                        } 
+        }

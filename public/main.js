@@ -1,4 +1,4 @@
-var socket = io.connect('http://10.20.1.66:4001');
+var socket = io.connect('http://10.20.1.90:4001');
 
 
 
