@@ -98,15 +98,9 @@ var socket = io.connect('http://10.20.1.90:4001');
             contexte.fillRect(pomme.x*cases,pomme.y*cases,cases,cases);
         }
 
-
-
-
         let show=function(serpent){
             contexte.fillStyle = serpent.color;
-            contexte.fillRect(serpent.snake.x*cases,serpent.snake.y*cases,cases-2,cases-2);
-            if(serpent.snake.x==serpent.snake.x && serpent.snake.y==serpent.snake.y) {
-                serpent.snake.queue = 1;
-            }           
+            contexte.fillRect(serpent.snake.x*cases,serpent.snake.y*cases,cases-2,cases-2); 
         }
     }
 
