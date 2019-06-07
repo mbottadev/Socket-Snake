@@ -232,18 +232,8 @@ io.on('connection',function(socket){
                 })
                 console.log(socket.id)
 
-            // setInterval(()=>{
-            //     }, 100)
-                
-            //     // scoreP1.innerText = snakes.p1.queue-1;
-            //     // scoreP2.innerText = snakes.p2.queue-1;
-            //     pomme.newApple()
-                
-            //     socket.emit('tick',{
-            //         joueurs:joueurs,
-            //         pomme:pomme,
-            //     })
-                
+            pomme.newApple()
+                                
             }
         }
     })
