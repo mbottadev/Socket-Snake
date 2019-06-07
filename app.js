@@ -23,15 +23,18 @@ var joueurs = []
 var joueursEnCours = []
 const cases = 30;
 
+let snakes;
+
 let pomme = {
             
     x:Math.floor(Math.random()*cases),
     y:Math.floor(Math.random()*cases),
     
     newApple: function(){
-        Object.keys(snakes).forEach((serpentId)=>{
-            if(this.x==snakes[serpentId].x && this.y==snakes[serpentId].y) {
-                snakes[serpentId].queue++;
+        Object.keys(joueurs).forEach((id)=>{
+            console.log(id)
+            if(this.x==joueurs[id].snake.x && this.y==joueurs[id].snake.y) {
+                joueurs[id].snake.queue++;
                 this.x=Math.floor(Math.random()*cases);
                 this.y=Math.floor(Math.random()*cases);
             }
@@ -161,7 +164,7 @@ class snake {
 }
 
 
-const snakes = {
+snakes = {
     p1: new snake(0),
     p2: new snake(1),
 };
@@ -209,7 +212,7 @@ io.on('connection',function(socket){
         if(endGame !== true){
             for(Id=0;Id<joueurs.length;Id++){
                 joueurs[Id].snake.move();
-                joueurs[Id].snake.retainPos();
+                // joueurs[Id].snake.retainPos();
                 // snakes[serpentId].cornerFever()
                 // snakes[serpentId].checkCollision(snakes, serpentId)
                 
@@ -230,23 +233,10 @@ io.on('connection',function(socket){
                     joueurs:joueurs,
                     pomme:pomme,
                 })
-                console.log(socket.id)
-
-            // setInterval(()=>{
-            //     }, 100)
-                
-            //     // scoreP1.innerText = snakes.p1.queue-1;
-            //     // scoreP2.innerText = snakes.p2.queue-1;
-            //     pomme.newApple()
-                
-            //     socket.emit('tick',{
-            //         joueurs:joueurs,
-            //         pomme:pomme,
-            //     })
-                
-            }
+            pomme.newApple()
         }
-    })
+    }
+})
             
         
 function keyPush(e,id) {
