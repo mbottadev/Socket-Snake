@@ -32,7 +32,6 @@ let pomme = {
     
     newApple: function(){
         Object.keys(joueurs).forEach((id)=>{
-            console.log(id)
             if(this.x==joueurs[id].snake.x && this.y==joueurs[id].snake.y) {
                 joueurs[id].snake.queue++;
                 this.x=Math.floor(Math.random()*cases);
@@ -144,16 +143,24 @@ class snake {
     }
     
 
-    checkCollision(snakes, ownId){
-        Object.keys(snakes).forEach((serpentId)=>{
-            if(serpentId !== ownId){
-                snakes[serpentId].tabSnake.forEach((tab)=>{
-                    if(this.x === tab.x && this.y === tab.y){
-                        this.queue = 1
-                    }
-                })
+    checkCollision(){
+        // Object.keys(snakes).forEach((serpentId)=>{
+        //     if(serpentId !== ownId){
+        //         snakes.tabSnake.forEach((tab)=>{
+        //             if(this.x === tab.x && this.y === tab.y){
+        //                 this.queue = 1
+        //             }
+        //         })
+        //     }
+        // })
+        for(let j=0;j<joueurs.length;j++){
+            for(let i=0;i<joueurs[j].snake.tabSnake.length;i++){
+                if(joueurs[j].snake.x == joueurs[j].snake.tabSnake[i].x && joueurs[j].snake.y == joueurs[j].snake.tabSnake[i].y){
+                    joueurs[j].snake.tabSnake = [] 
+                }
             }
-        })
+        }
+
     }
 
     // curve fever 
@@ -210,11 +217,12 @@ io.on('connection',function(socket){
     
     function game() {
         if(endGame !== true){
+            pomme.newApple()
             for(Id=0;Id<joueurs.length;Id++){
                 joueurs[Id].snake.move();
-                // joueurs[Id].snake.retainPos();
+                //joueurs[Id].snake.checkCollision()
+                joueurs[Id].snake.retainPos();
                 // snakes[serpentId].cornerFever()
-                // snakes[serpentId].checkCollision(snakes, serpentId)
                 
                 
                 if (joueurs[Id].snake.queue > 25){
@@ -233,7 +241,6 @@ io.on('connection',function(socket){
                     joueurs:joueurs,
                     pomme:pomme,
                 })
-            pomme.newApple()
         }
     }
 })
