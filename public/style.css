@@ -24,9 +24,11 @@ body{
 }
 
 #afficheWinner{
-    widows: 0vw;
-    height: 0vh;
-    z-index: 1;
+    widows: 1000vw;
+    height: 100vh;
+    z-index: -2;
+    background-color: black;
+    opacity: 0.7;
 }
 
 #containBtn{

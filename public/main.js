@@ -87,6 +87,7 @@ var socket = io.connect('10.20.1.90:4001');
             afficheWinner.innerText = data.winner.pseudo + " won";
             afficheWinner.style.backgroundColor = "black";
             afficheWinner.style.color = data.winner.color;
+            afficheWinner.style.zIndex = 10;
             afficheWinner.style.fontSize = "200px";
             afficheWinner.style.fontFamily = "'Raleway Dots', cursive";        
             afficheWinner.style.fontFamily = "'Raleway Dots', cursive";         
