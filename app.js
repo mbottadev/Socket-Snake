@@ -165,9 +165,9 @@ class snake {
 
     // curve fever 
 
-    cornerFever(){
-        this.queue ++
-    }
+    // cornerFever(){
+    //     this.queue ++
+    // }
 }
 
 
