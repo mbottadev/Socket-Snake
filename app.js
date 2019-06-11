@@ -154,9 +154,10 @@ class snake {
         //     }
         // })
         for(let j=0;j<joueurs.length;j++){
-            for(let i=0;i<joueurs[j].snake.tabSnake.length;i++){
+            for(let i=1 ;i<joueurs[j].snake.tabSnake.length;i++){
                 if(joueurs[j].snake.x == joueurs[j].snake.tabSnake[i].x && joueurs[j].snake.y == joueurs[j].snake.tabSnake[i].y){
-                    joueurs[j].snake.tabSnake = [] 
+                    console.warn(joueurs[j].snake.tabSnake)
+                    joueurs[j].snake.queue=1
                 }
             }
         }
@@ -220,8 +221,8 @@ io.on('connection',function(socket){
             pomme.newApple()
             for(Id=0;Id<joueurs.length;Id++){
                 joueurs[Id].snake.move();
-                //joueurs[Id].snake.checkCollision()
                 joueurs[Id].snake.retainPos();
+                joueurs[Id].snake.checkCollision()
                 // snakes[serpentId].cornerFever()
                 
                 

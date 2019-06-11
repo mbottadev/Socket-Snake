@@ -66,7 +66,6 @@ var socket = io.connect('http://10.20.1.90:4001');
             ennemi = checkEnnemi(data.joueurs,socket.id)
             show(self)
             show(ennemi)
-            console.log("test")
             // console.log(ennemi)
         })
 
@@ -103,6 +102,7 @@ var socket = io.connect('http://10.20.1.90:4001');
             contexte.fillRect(serpent.snake.x*cases,serpent.snake.y*cases,cases-2,cases-2); 
             for(i=0;i<serpent.snake.tabSnake.length;i++){
                 contexte.fillRect(serpent.snake.tabSnake[i].x*cases,serpent.snake.tabSnake[i].y*cases,cases-2,cases-2);
+                // console.log(serpent.snake.tabSnake[i].x + " " + serpent.snake.tabSnake[i].y)
             }
         }
         
