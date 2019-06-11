@@ -10,14 +10,15 @@
     <script type="text/javascript" src="main.js"></script>
     <title>Document</title>
 </head>
-<body>
-    <div id="form" class="deco">
-        <form id="loginForm"> 
-            <input name="pseudo" type="text">
-            <button type="submit">submit</button>
-        </form>
-    </div>
-    <div id="jeu" class="allPPage" style="visibility:hidden">
+    <body>
+        <div id="form" class="deco">
+            <form id="loginForm"> 
+                <label for="pseudo">Votre pseudo : </label>
+                <input maxlength="15" minlength="3" name="pseudo" type="text">
+                <button type="submit">Ready?</button>
+            </form>
+        </div>
+        <div id="jeu" class="allPPage" style="visibility:hidden">
             <a href="index.html" class="homeBtn"><img src="arrow.svg" class="fleche"/></a>
             <div id="afficheWinner"></div>
             <div class="containScore" id="color">
@@ -30,5 +31,9 @@
             </div>
             <canvas id="cadre" width="900" height="900"></canvas>
         </div>
-</body>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            // const socket = io('http://localhost');
+        </script>
+    </body>
 </html>

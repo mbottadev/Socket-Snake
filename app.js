@@ -185,7 +185,7 @@ io.on('connection',function(socket){
             var p2 = new infoJoueurs(1)
             p2.pseudo = data.pseudo
             p2.ip = socket.id
-            p2.color = "blue"
+            p2.color = data.color
             p2.snake = new snake(1)
             joueurs.push(p2)
         }
@@ -193,7 +193,7 @@ io.on('connection',function(socket){
             var p1 = new infoJoueurs(0)
             p1.pseudo = data.pseudo
             p1.ip = socket.id
-            p1.color = "yellow"
+            p1.color = data.color
             p1.snake = new snake(0)
             joueurs.push(p1)
         }

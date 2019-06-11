@@ -1,5 +1,5 @@
-var socket = io.connect('http://10.20.1.90:4001');
-
+var socket = io.connect('10.20.1.90:4001');
+// var socket = io();
 
 
     window.onload = () => {
@@ -13,7 +13,7 @@ var socket = io.connect('http://10.20.1.90:4001');
         let scoreP2 = document.getElementById("scoreP2");
         let colorP1 = document.getElementById("colorP1");
         let colorP2 = document.getElementById("colorP2");
-
+        let myColor = ("rgb("+ Math.floor(Math.random()*255) + ","  + Math.floor(Math.random()*255) +","+ Math.floor(Math.random()*255)+")")
 
         let check = function(joueurs,socketId){
             if (socketId == joueurs[0].ip){
@@ -34,7 +34,8 @@ var socket = io.connect('http://10.20.1.90:4001');
             e.preventDefault();
             let pseudoLocal = e.target.pseudo.value
             socket.emit('ready',{
-                pseudo: encodeURIComponent(pseudoLocal)
+                pseudo: encodeURIComponent(pseudoLocal),
+                color : myColor
             })
         } )
         
@@ -51,7 +52,11 @@ var socket = io.connect('http://10.20.1.90:4001');
             jeu.style.visibility = "visible";  
             self = check(data.joueurs,socket.id)
             ennemi = checkEnnemi(data.joueurs,socket.id)
+            colorP1.style.color = self.color;
+            scoreP1.style.color = self.color;
             colorP1.innerText = self.pseudo;
+            colorP2.style.color = ennemi.color;
+            scoreP2.style.color = ennemi.color;
             colorP2.innerText = ennemi.pseudo;
             pomme = data.pomme
             dessinePomme(pomme)
@@ -68,6 +73,9 @@ var socket = io.connect('http://10.20.1.90:4001');
             ennemi = checkEnnemi(data.joueurs,socket.id)
             show(self)
             show(ennemi)
+            scoreP1.innerText=self.snake.queue - 1
+            scoreP2.innerText=ennemi.snake.queue - 1
+
             // console.log(ennemi)
         })
 
