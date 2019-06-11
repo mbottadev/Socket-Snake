@@ -211,6 +211,13 @@ io.on('connection',function(socket){
 
     let endGame = false;
 
+    socket.on('restart',()=>{
+        endGame = false;
+        joueurs[1].snake = new snake(1)
+        joueurs[0].snake = new snake(0)
+
+    })
+
     socket.on('touche',function(data){
         keyPush(data.key,socket.id)
     })

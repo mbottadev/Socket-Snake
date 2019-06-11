@@ -87,17 +87,24 @@ var socket = io.connect('10.20.1.90:4001');
             afficheWinner.innerText = data.winner.pseudo + " won";
             afficheWinner.style.backgroundColor = "black";
             afficheWinner.style.color = data.winner.color;
-            afficheWinner.style.zIndex = 10;
+            afficheWinner.style.zIndex = 11;
+            afficheWinnerContainer.style.zIndex = 10;
             afficheWinner.style.fontSize = "200px";
             afficheWinner.style.fontFamily = "'Raleway Dots', cursive";        
-            afficheWinner.style.fontFamily = "'Raleway Dots', cursive";         
+            afficheWinner.style.fontFamily = "'Raleway Dots', cursive";  
+            afficheWinner.style.visibility = "visible";
+            afficheWinnerContainer.style.visibility = "visible";
+            restart.style.visibility = "visible";
+            restart.style.zIndex = 12;
+
         })
 
             
         let cadre=document.getElementById("cadre");
         let contexte=cadre.getContext("2d");
         let afficheWinner=document.getElementById("afficheWinner");
-
+        let afficheWinnerContainer=document.getElementById("afficheWinnerContainer");
+        let restart = document.getElementById("restart");
 
         document.addEventListener("keydown",function(e){
             socket.emit('touche',{
@@ -105,8 +112,10 @@ var socket = io.connect('10.20.1.90:4001');
             })
         });
         
-        
-        
+        restart.addEventListener("click",()=>{
+            socket.emit('restart')
+        })
+
         const cases = 28;
         
 

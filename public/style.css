@@ -24,7 +24,21 @@ body{
 }
 
 #afficheWinner{
-    widows: 1000vw;
+    visibility: hidden;
+    text-align: center;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+}
+
+#afficheWinnerContainer{
+    visibility: hidden;
+    position: absolute;
+    top:0;
+    bottom:0;
+    text-align: center;
+    width: 100vw;
     height: 100vh;
     z-index: -2;
     background-color: black;
@@ -62,7 +76,13 @@ body{
     margin-top: 10%;
 }
 
-
+#restart{
+    position: fixed;
+    margin:auto;
+    top:40vh;
+    z-index: -1;
+    visibility: hidden;
+}
 /* --------------------------------------------------------------------------------------------- */
 
 /* 2P PAGE */
