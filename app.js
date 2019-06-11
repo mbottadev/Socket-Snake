@@ -154,9 +154,8 @@ class snake {
         //     }
         // })
         for(let j=0;j<joueurs.length;j++){
-            for(let i=1 ;i<joueurs[j].snake.tabSnake.length;i++){
+            for(let i=0 ;i<joueurs[j].snake.tabSnake.length - 1;i++){
                 if(joueurs[j].snake.x == joueurs[j].snake.tabSnake[i].x && joueurs[j].snake.y == joueurs[j].snake.tabSnake[i].y){
-                    console.warn(joueurs[j].snake.tabSnake)
                     joueurs[j].snake.queue=1
                 }
             }
@@ -226,14 +225,11 @@ io.on('connection',function(socket){
                 // snakes[serpentId].cornerFever()
                 
                 
-                if (joueurs[Id].snake.queue > 25){
+                if (joueurs[Id].snake.queue > 5){
                     
-                    afficheWinner.innerText = snakes[serpentId].color + " snake won";
-                    afficheWinner.style.backgroundColor = "black";
-                    afficheWinner.style.color = snakes[serpentId].color;
-                    afficheWinner.style.fontSize = "200px";
-                    afficheWinner.style.fontFamily = "'Raleway Dots', cursive";        
-                    afficheWinner.style.fontFamily = "'Raleway Dots', cursive";                    
+                    io.sockets.emit('EndGame',{
+                        winner:joueurs[Id]
+                    })
                     endGame = true
                 }            
             }

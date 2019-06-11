@@ -42,6 +42,8 @@ var socket = io.connect('http://10.20.1.90:4001');
         let ennemi = {}
         let pomme = {}
         
+
+        
         socket.on('redirection',function(data){
             contexte.fillStyle="black";
             contexte.fillRect(0,0,cadre.width,cadre.height);
@@ -72,7 +74,14 @@ var socket = io.connect('http://10.20.1.90:4001');
 
         
 
-        socket.on('identite',function(data){
+        socket.on('EndGame',function(data){
+            console.log("Someone won")
+            afficheWinner.innerText = data.winner.pseudo + " won";
+            afficheWinner.style.backgroundColor = "black";
+            afficheWinner.style.color = data.winner.color;
+            afficheWinner.style.fontSize = "200px";
+            afficheWinner.style.fontFamily = "'Raleway Dots', cursive";        
+            afficheWinner.style.fontFamily = "'Raleway Dots', cursive";         
         })
 
             

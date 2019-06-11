@@ -23,6 +23,11 @@ body{
     overflow: hidden;
 }
 
+#afficheWinner{
+    widows: 100vw;
+    height: 100vh;
+}
+
 #containBtn{
     margin-top: 35%;
     display: flex;
