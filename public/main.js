@@ -13,8 +13,8 @@ var socket = io.connect('10.20.1.90:4001');
         let scoreP2 = document.getElementById("scoreP2");
         let colorP1 = document.getElementById("colorP1");
         let colorP2 = document.getElementById("colorP2");
-        let myColor = ("rgb("+ Math.floor(Math.random()*255) + ","  + Math.floor(Math.random()*255) +","+ Math.floor(Math.random()*255)+")")
-
+        let myColor = ("rgb("+ Math.floor((Math.random()*215) + 40) + ","  + Math.floor((Math.random()*215) + 40) +","+ Math.floor((Math.random()*215) + 40)+")")
+        console.log(myColor)
         let check = function(joueurs,socketId){
             if (socketId == joueurs[0].ip){
                 return joueurs[0]
@@ -107,7 +107,7 @@ var socket = io.connect('10.20.1.90:4001');
         
         
         
-        const cases = 30;
+        const cases = 28;
         
 
         let dessinePomme= function(pomme){

@@ -21,7 +21,7 @@ class infoJoueurs {
 }
 var joueurs = []
 var joueursEnCours = []
-const cases = 30;
+const cases = 28;
 
 let snakes;
 
