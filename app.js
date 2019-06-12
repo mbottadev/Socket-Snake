@@ -215,7 +215,10 @@ io.on('connection',function(socket){
         endGame = false;
         joueurs[1].snake = new snake(1)
         joueurs[0].snake = new snake(0)
+        io.sockets.emit('reset')
+        console.log("restart game : " + endGame + " at " + new Date())
 
+        game()
     })
 
     socket.on('touche',function(data){
@@ -224,6 +227,8 @@ io.on('connection',function(socket){
     
     function game() {
         if(endGame !== true){
+            console.log("game running : " + endGame + " at " + new Date())
+
             pomme.newApple()
             for(Id=0;Id<joueurs.length;Id++){
                 joueurs[Id].snake.move();
@@ -233,11 +238,12 @@ io.on('connection',function(socket){
                 
                 
                 if (joueurs[Id].snake.queue > 5){
-                    
+                    console.log(joueurs[Id].pseudo + " a une queue de " + joueurs[Id].snake.queue)
                     io.sockets.emit('EndGame',{
                         winner:joueurs[Id]
                     })
                     endGame = true
+                    console.log("Someone Won")
                 }            
             }
             
