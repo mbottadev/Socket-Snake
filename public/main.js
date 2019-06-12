@@ -46,9 +46,9 @@ var socket = io.connect('10.20.1.90:4001');
 
         
         socket.on('redirection',function(data){
+            form.parentNode.removeChild(form)
             contexte.fillStyle="black";
             contexte.fillRect(0,0,cadre.width,cadre.height);
-            form.style.visibility = "hidden";
             jeu.style.visibility = "visible";  
             self = check(data.joueurs,socket.id)
             ennemi = checkEnnemi(data.joueurs,socket.id)
@@ -115,7 +115,9 @@ var socket = io.connect('10.20.1.90:4001');
         restart.addEventListener("click",()=>{
             socket.emit('restart')
         })
-
+        socket.on('reset',()=>{
+            afficheWinnerContainer.style.zIndex = -2
+        })
         const cases = 28;
         
 
