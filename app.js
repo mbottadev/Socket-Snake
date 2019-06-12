@@ -23,6 +23,7 @@ var joueurs = []
 var joueursEnCours = []
 const cases = 28;
 
+let endGame = false;
 let snakes;
 
 let pomme = {
@@ -181,6 +182,7 @@ io.on('connection',function(socket){
     console.log(socket.id)
     console.log('Made socket connection', socket.handshake.address);
     socket.on('ready',function(data){
+
         if (joueurs.length == 1) {
             var p2 = new infoJoueurs(1)
             p2.pseudo = data.pseudo
@@ -204,21 +206,22 @@ io.on('connection',function(socket){
             })
             joueursEnCours.push(joueurs)
              //joueurs = []
-            setInterval(game,100);
-            
+            gameTick()            
         }
     })
 
-    let endGame = false;
+
+    let gameTick = function(){
+        setInterval(game,100);
+    }
 
     socket.on('restart',()=>{
         endGame = false;
-        joueurs[1].snake = new snake(1)
-        joueurs[0].snake = new snake(0)
+        for(let i = 0; i< joueurs.length;i++){
+            joueurs[i].snake = new snake(i)
+        }
         io.sockets.emit('reset')
         console.log("restart game : " + endGame + " at " + new Date())
-
-        game()
     })
 
     socket.on('touche',function(data){

@@ -113,10 +113,13 @@ var socket = io.connect('10.20.1.90:4001');
         });
         
         restart.addEventListener("click",()=>{
+            console.log("send restart")
             socket.emit('restart')
         })
         socket.on('reset',()=>{
             afficheWinnerContainer.style.zIndex = -2
+            console.log("receive reset")
+
         })
         const cases = 28;
         
