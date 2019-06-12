@@ -13,8 +13,8 @@ var socket = io.connect('10.20.1.90:4001');
         let scoreP2 = document.getElementById("scoreP2");
         let colorP1 = document.getElementById("colorP1");
         let colorP2 = document.getElementById("colorP2");
-        let myColor = ("rgb("+ Math.floor(Math.random()*255) + ","  + Math.floor(Math.random()*255) +","+ Math.floor(Math.random()*255)+")")
-
+        let myColor = ("rgb("+ Math.floor((Math.random()*215) + 40) + ","  + Math.floor((Math.random()*215) + 40) +","+ Math.floor((Math.random()*215) + 40)+")")
+        console.log(myColor)
         let check = function(joueurs,socketId){
             if (socketId == joueurs[0].ip){
                 return joueurs[0]
@@ -87,17 +87,24 @@ var socket = io.connect('10.20.1.90:4001');
             afficheWinner.innerText = data.winner.pseudo + " won";
             afficheWinner.style.backgroundColor = "black";
             afficheWinner.style.color = data.winner.color;
-            afficheWinner.style.zIndex = 10;
+            afficheWinner.style.zIndex = 11;
+            afficheWinnerContainer.style.zIndex = 10;
             afficheWinner.style.fontSize = "200px";
             afficheWinner.style.fontFamily = "'Raleway Dots', cursive";        
-            afficheWinner.style.fontFamily = "'Raleway Dots', cursive";         
+            afficheWinner.style.fontFamily = "'Raleway Dots', cursive";  
+            afficheWinner.style.visibility = "visible";
+            afficheWinnerContainer.style.visibility = "visible";
+            restart.style.visibility = "visible";
+            restart.style.zIndex = 12;
+
         })
 
             
         let cadre=document.getElementById("cadre");
         let contexte=cadre.getContext("2d");
         let afficheWinner=document.getElementById("afficheWinner");
-
+        let afficheWinnerContainer=document.getElementById("afficheWinnerContainer");
+        let restart = document.getElementById("restart");
 
         document.addEventListener("keydown",function(e){
             socket.emit('touche',{
@@ -105,9 +112,11 @@ var socket = io.connect('10.20.1.90:4001');
             })
         });
         
-        
-        
-        const cases = 30;
+        restart.addEventListener("click",()=>{
+            socket.emit('restart')
+        })
+
+        const cases = 28;
         
 
         let dessinePomme= function(pomme){

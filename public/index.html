@@ -20,7 +20,10 @@
         </div>
         <div id="jeu" class="allPPage" style="visibility:hidden">
             <a href="index.html" class="homeBtn"><img src="arrow.svg" class="fleche"/></a>
-            <div id="afficheWinner"></div>
+            <div id="afficheWinnerContainer">
+                <p id="afficheWinner"></p>
+                <button id="restart" > Play Again?</button>
+            </div>
             <div class="containScore" id="color">
                 <h1 id="colorP1"></h1>
                 <h1 id="colorP2"></h1>
@@ -29,7 +32,7 @@
                 <h1 id="scoreP1"></h1>
                 <h1 id="scoreP2"></h1>
             </div>
-            <canvas id="cadre" width="900" height="900"></canvas>
+            <canvas id="cadre" width="784" height="784"></canvas>
         </div>
         <script src="/socket.io/socket.io.js"></script>
         <script>
