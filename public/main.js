@@ -184,10 +184,19 @@ var socket = io.connect('10.70.0.54:4001');
 
         let show=function(serpent){
             contexte.fillStyle = serpent.color;
-            contexte.fillRect(serpent.snake.x*cases,serpent.snake.y*cases,cases-2,cases-2); 
-            for(i=0;i<serpent.snake.tabSnake.length;i++){
-                contexte.fillRect(serpent.snake.tabSnake[i].x*cases,serpent.snake.tabSnake[i].y*cases,cases-2,cases-2);
-                // console.log(serpent.snake.tabSnake[i].x + " " + serpent.snake.tabSnake[i].y)
+            contexte.beginPath();
+            contexte.arc(serpent.snake.x * cases + cases/2,serpent.snake.y * cases + cases /2,cases/2 + 5, 0, Math.PI * 2); 
+            contexte.fill();
+            contexte.closePath();
+            for(i=0;i<serpent.snake.tabSnake.length;i++){                    
+                    contexte.fillStyle = serpent.color;
+                    contexte.beginPath();
+                    contexte.arc(serpent.snake.tabSnake[i].x * cases + cases/2,serpent.snake.tabSnake[i].y * cases + cases /2,(cases/2 + 5) - ((serpent.snake.tabSnake.length -i)/Math.sqrt(serpent.snake.tabSnake.length)), 0, Math.PI * 2); 
+                    contexte.fill();
+                    contexte.closePath();
+               
+                    // contexte.fillRect(serpent.snake.tabSnake[i].x*cases,serpent.snake.tabSnake[i].y*cases,cases,cases);
+                    // console.log(serpent.snake.tabSnake[i].x + " " + serpent.snake.tabSnake[i].y)
             }
         }
         

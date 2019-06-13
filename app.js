@@ -249,7 +249,7 @@ io.on('connection',function(socket){
                 // snakes[serpentId].cornerFever()
                 
                 
-                if (joueurs[Id].snake.queue > 5){
+                if (joueurs[Id].snake.queue > 15){
                     console.log(joueurs[Id].pseudo + " a une queue de " + joueurs[Id].snake.queue)
                     io.sockets.emit('EndGame',{
                         winner:joueurs[Id]
