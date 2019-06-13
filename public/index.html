@@ -15,6 +15,26 @@
             <form id="loginForm"> 
                 <label for="pseudo">Votre pseudo : </label>
                 <input maxlength="15" minlength="3" name="pseudo" type="text">
+                <table id="colorPicker">
+                    <tr>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                    </tr>
+                    <tr>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                    </tr>
+                    <tr>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                    </tr>
+                </table>
                 <button type="submit">Ready?</button>
             </form>
         </div>
@@ -24,11 +44,13 @@
                 <p id="afficheWinner"></p>
                 <button id="restart" > Play Again?</button>
             </div>
+            <div id="timer">Start in : 3</div>
+            <div id="score"></div>
             <div class="containScore" id="color">
                 <h1 id="colorP1"></h1>
                 <h1 id="colorP2"></h1>
             </div>
-            <div class="containScore">
+            <div class="containScore" >
                 <h1 id="scoreP1"></h1>
                 <h1 id="scoreP2"></h1>
             </div>
