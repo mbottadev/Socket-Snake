@@ -3,7 +3,7 @@ var socket = require('socket.io')
 //App setup
 
 var app = express();
-var server = app.listen(4001,function(){
+var server = app.listen(4002,function(){
     console.log("listen to 4001")
 } )
 
@@ -216,7 +216,6 @@ io.on('connection',function(socket){
         joueurs[1].snake = new snake(1)
         joueurs[0].snake = new snake(0)
         io.sockets.emit('reset')
-        console.log("restart game : " + endGame + " at " + new Date())
 
         game()
     })
@@ -227,7 +226,6 @@ io.on('connection',function(socket){
     
     function game() {
         if(endGame !== true){
-            console.log("game running : " + endGame + " at " + new Date())
 
             pomme.newApple()
             for(Id=0;Id<joueurs.length;Id++){
