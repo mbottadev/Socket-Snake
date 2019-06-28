@@ -1,9 +1,10 @@
 var express = require('express');
 var socket = require('socket.io')
+var connectedClients = []
 //App setu p
 
 var app = express();
-var server = app.listen(4001,function(){
+var server = app.listen(4002,function(){
     console.log("listen to 4001")
 } )
 
@@ -14,9 +15,9 @@ var io = socket(server);
 class infoJoueurs {
     constructor(numero){
         this.pseudo = "";
-        this.ip = "";
+        this.id = "";
         this.color = "";
-        this.numero = -1;
+        this.numero = numero;
     }
 }
 var joueurs = []
@@ -200,15 +201,18 @@ io.on('connection',function(socket){
     console.log(socket.id)
     console.log('Made socket connection', socket.handshake.address);
     socket.on('ready',function(data){
-        let nbJoueurs = joueurs.length
-        let player = new infoJoueurs(nbJoueurs)
-        player.pseudo = data.pseudo
-        player.ip = socket.id
-        player.color = data.color
-        player.snake = new snake(nbJoueurs)
-        joueurs.push(player)
-
-        if (joueurs.length == 2){
+        if(!connectedClients.includes(socket.id) || true){
+            connectedClients.push(socket.id)
+            let nbJoueurs = joueurs.length
+            let player = new infoJoueurs(nbJoueurs)
+            player.pseudo = data.pseudo
+            player.id = socket.id
+            player.color = data.color
+            player.snake = new snake(nbJoueurs)
+            joueurs.push(player)
+            console.log(joueurs)
+        }
+        if (joueurs.length === 2){
             io.sockets.emit('redirection',{
                 joueurs:joueurs,
                 pomme:pomme,
@@ -286,11 +290,15 @@ function keyPush(e,id) {
                 direction = 'left'
             break;
         }
-            
-        if (joueurs[0].ip == id){
-            joueurs[0].snake.direction(direction)
-        } else if (joueurs[1].ip == id){
-            joueurs[1].snake.direction(direction)
-        }
+        joueurs.forEach( joueur =>{
+            if (joueur.id === id){
+                joueur.snake.direction(direction)
+            }
+        })
+        // if (joueurs[0].id == id){
+        //     joueurs[0].snake.direction(direction)
+        // } else if (joueurs[1].id == id){
+        //     joueurs[1].snake.direction(direction)
+        // }
     } 
 }

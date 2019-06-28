@@ -1,4 +1,4 @@
-var socket = io.connect('10.70.0.54:4001');
+var socket = io.connect('10.70.0.54:4002');
 // var socket = io();
 
 
@@ -13,7 +13,7 @@ var socket = io.connect('10.70.0.54:4001');
         let jeu = document.getElementById("jeu");
         let loginForm = document.getElementById("loginForm");
         let scoreContainer = document.getElementById("score");
-        let myColor = ("rgb("+ Math.floor((Math.random()*215) + 40) + ","  + Math.floor((Math.random()*215) + 40) +","+ Math.floor((Math.random()*215) + 40)+")")
+        let myColor = ("rgb("+ Math.floor((Math.random()*100) + 100) + ","  + Math.floor((Math.random()*100) + 100) +","+ Math.floor((Math.random()*100) + 100)+")")
         console.log(myColor)
 
         for (let i = 0; i < colorPickerCells.length;i++){
@@ -27,21 +27,6 @@ var socket = io.connect('10.70.0.54:4001');
             }
             )
         }
-
-        let check = function(joueurs,socketId){
-            if (socketId == joueurs[0].ip){
-                return joueurs[0]
-            } else if (socketId == joueurs[1].ip) {
-                return joueurs [1]
-            }
-        }
-        let checkEnnemi = function(joueurs,socketId){
-            if (socketId == joueurs[0].ip){
-                return joueurs[1]
-            } else if (socketId == joueurs[1].ip) {
-                return joueurs [0]
-            }
-        }
         
         loginForm.addEventListener('submit', function(e){
             e.preventDefault();
@@ -52,12 +37,10 @@ var socket = io.connect('10.70.0.54:4001');
             })
         } )
         
-        let self = {}
-        let ennemi = {}
         let pomme = {}
         
         let scoreContainerArray = []
-
+        let joueurs = []
         
         socket.on('redirection',function(data){
             form.parentNode.removeChild(form)
@@ -75,7 +58,7 @@ var socket = io.connect('10.70.0.54:4001');
 
                 joueurContainer.appendChild(joueurPseudo)
                 joueurContainer.appendChild(joueurScore)
-
+                joueurContainer.className ="color"
                 scoreContainerArray.push(joueurContainer)
 
                 joueurPseudo.innerText = data.joueurs[i].pseudo
@@ -90,18 +73,12 @@ var socket = io.connect('10.70.0.54:4001');
             contexte.fillStyle="black";
             contexte.fillRect(0,0,cadre.width,cadre.height);
             jeu.style.visibility = "visible";  
-            self = check(data.joueurs,socket.id)
-            ennemi = checkEnnemi(data.joueurs,socket.id)
-            colorP1.style.color = self.color;
-            scoreP1.style.color = self.color;
-            colorP1.innerText = self.pseudo;
-            colorP2.style.color = ennemi.color;
-            scoreP2.style.color = ennemi.color;
-            colorP2.innerText = ennemi.pseudo;
             pomme = data.pomme
             dessinePomme(pomme)
-            show(self)
-            show(ennemi)
+            joueurs = data.joueurs
+            joueurs.forEach(joueur => {
+                show(joueur)
+            });
         })
         
         socket.on('timerTick', (data)=>{
@@ -117,17 +94,14 @@ var socket = io.connect('10.70.0.54:4001');
             contexte.fillRect(0,0,cadre.width,cadre.height);
             pomme = data.pomme
             dessinePomme(pomme)
-            self = check(data.joueurs,socket.id)
-            ennemi = checkEnnemi(data.joueurs,socket.id)
-            show(self)
-            show(ennemi)
-            scoreP1.innerText=self.snake.queue - 1
-            scoreP2.innerText=ennemi.snake.queue - 1
+            joueurs = data.joueurs
+            joueurs.forEach(joueur => {
+                show(joueur)
+            });
             for(let i = 0;i<scoreContainerArray.length;i++){
                 scoreContainerArray[i].children[1].textContent  = data.joueurs[i].snake.queue - 1
                 scoreContainer.appendChild(scoreContainerArray[i])
             }
-            // console.log(ennemi)
         })
 
 
