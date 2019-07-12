@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="style.css"> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Raleway+Dots" rel="stylesheet">
-    <script type="text/javascript" src="main.js"></script>
-    <title>Document</title>
-</head>
+    <head>
+        <meta name="Description" content="Small Snake game">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="style.css"> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Raleway+Dots" rel="stylesheet">
+        <script type="text/javascript" src="main.js"></script>
+        <title>SocketSnake</title>
+        <link rel="shortcut icon" type="image/x-icon" href="snake.ico" />
+    </head>
     <body>
         <div id="form" class="deco">
             <form id="loginForm"> 
-                <label for="pseudo">Votre pseudo : </label>
-                <input maxlength="15" minlength="3" name="pseudo" type="text" required>
+                <label for="pseudo">Votre pseudo : 
+                    <input maxlength="15" minlength="3" name="pseudo" type="text" required>
+                </label>
                 <table id="colorPicker">
                     <tr>
                         <td class="singleColor"></td>

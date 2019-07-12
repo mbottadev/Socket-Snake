@@ -164,15 +164,7 @@ class snake {
     
 
     checkCollision(){
-        // Object.keys(snakes).forEach((serpentId)=>{
-        //     if(serpentId !== ownId){
-        //         snakes.tabSnake.forEach((tab)=>{
-        //             if(this.x === tab.x && this.y === tab.y){
-        //                 this.queue = 1
-        //             }
-        //         })
-        //     }
-        // })
+        
         for(let j=0;j<joueurs.length;j++){
             for(let i=0 ;i<joueurs[j].snake.tabSnake.length - 1;i++){
                 if(joueurs[j].snake.x == joueurs[j].snake.tabSnake[i].x && joueurs[j].snake.y == joueurs[j].snake.tabSnake[i].y){
@@ -189,13 +181,6 @@ class snake {
     //     this.queue ++
     // }
 }
-
-
-snakes = {
-    p1: new snake(0),
-    p2: new snake(1),
-};
-
 
 io.on('connection',function(socket){
     console.log(socket.id)
@@ -250,7 +235,6 @@ io.on('connection',function(socket){
                 joueurs[Id].snake.move();
                 joueurs[Id].snake.retainPos();
                 joueurs[Id].snake.checkCollision()
-                // snakes[serpentId].cornerFever()
                 
                 
                 if (joueurs[Id].snake.queue > 15){
@@ -295,10 +279,5 @@ function keyPush(e,id) {
                 joueur.snake.direction(direction)
             }
         })
-        // if (joueurs[0].id == id){
-        //     joueurs[0].snake.direction(direction)
-        // } else if (joueurs[1].id == id){
-        //     joueurs[1].snake.direction(direction)
-        // }
     } 
 }
