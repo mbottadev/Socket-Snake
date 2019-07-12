@@ -19,6 +19,7 @@
                     <input maxlength="15" minlength="3" name="pseudo" type="text" required>
                 </label>
                 <table id="colorPicker">
+>>>>>>> 46008dd4e08c821fa707a12f02902e103c253cda
                     <tr>
                         <td class="singleColor"></td>
                         <td class="singleColor"></td>
@@ -38,11 +39,11 @@
                         <td class="singleColor"></td>
                     </tr>
                 </table>
-                <button type="submit">Ready?</button>
+                <button type="submit" class="formItem" id="go">GO</button>
             </form>
         </div>
         <div id="jeu" class="allPPage" style="visibility:hidden">
-            <a href="index.html" class="homeBtn"><img src="arrow.svg" class="fleche"/></a>
+            <a href="index.html" class="homeBtn"><img src="logos/arrow.svg" class="fleche"/></a>
             <div id="afficheWinnerContainer">
                 <p id="afficheWinner"></p>
                 <button id="restart" > Play Again?</button>
@@ -57,7 +58,7 @@
                 <h1 id="scoreP1"></h1>
                 <h1 id="scoreP2"></h1>
             </div>
-            <canvas id="cadre" width="784" height="784"></canvas>
+            <canvas id="cadre" width="784" height="784></canvas>
         </div>
         <script src="/socket.io/socket.io.js"></script>
         <script>

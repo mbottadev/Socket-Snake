@@ -6,7 +6,7 @@
 }
 
 body{
-    background-color:  lime;
+    background-color:  #4169E1;
     overflow: hidden;    
 }
 
@@ -106,11 +106,11 @@ body{
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background-color:  lime;
+    background-color:  #4169E1;
 }
 
 .deco {
-    background-color:  lime;
+    background-color:  #4169E1;
 
 }
 #timer{
@@ -136,14 +136,20 @@ body{
     word-wrap: break-word;
     max-width: 18vw;
     min-width: 10vw;
+<<<<<<< HEAD
+
+    
+=======
     display: flex;
     flex-direction: row;
     justify-content: space-between;s
+>>>>>>> 46008dd4e08c821fa707a12f02902e103c253cda
 }
 canvas{
     /* margin-bottom: 10px; */
     padding-bottom: 10px;
     bottom: 10px;
+    /* background-image: url(./images/sol.png) */
 }
 .containScore{
     display: flex;
@@ -152,9 +158,44 @@ canvas{
     width: 625px;
 }
 
+#loginForm{
+    text-align: center;
+    background-color: #f1c40f;
+    margin-left: 10%; 
+    margin-right: 10%; 
+    margin-top: 10%; 
+    margin-bottom: 5%; 
+    /* padding-bottom: 10%; 
+    padding-top: 10%;  */
+    padding-left: 35%;
+    padding-right: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 28px;
+}
 .singleColor{
     width:35px;
     height:35px;
     border: 0.5px solid lightgray;
-    background-color: blue
+    background-color: blue;
+}
+
+.formItem{
+    margin-top: 12%;
+    margin-bottom: 12%;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+#go{
+    background: #3498db;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    cursor: pointer;    
+    font-size: 50px;
+
+}
+#go:focus{
+    outline: none;
 }
