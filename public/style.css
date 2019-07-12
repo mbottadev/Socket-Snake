@@ -113,12 +113,37 @@ body{
     background-color:  #4169E1;
 
 }
-#colorP1, #colorP2{
+#timer{
+    font-size: 2.8em;
+    text-decoration: underline black;
+}
+
+#score{
+    position: absolute;
+    left:0;
+    top:150px;
+    display: flex;
+    flex-flow: column;
+    background: #00000031;
+    border-radius: 10px;
+    border: solid 1px #000000ee;
+    margin-left: 20px;
+
+}
+.color{
+    margin:10px ;
+    display: block;
     word-wrap: break-word;
     max-width: 18vw;
     min-width: 10vw;
+<<<<<<< HEAD
 
     
+=======
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;s
+>>>>>>> 46008dd4e08c821fa707a12f02902e103c253cda
 }
 canvas{
     /* margin-bottom: 10px; */
