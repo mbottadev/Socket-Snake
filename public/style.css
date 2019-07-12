@@ -6,7 +6,7 @@
 }
 
 body{
-    background-color:  lime;
+    background-color:  #4169E1;
     overflow: hidden;    
 }
 
@@ -110,7 +110,7 @@ body{
 }
 
 .deco {
-    background-color:  lime;
+    background-color:  #4169E1;
 
 }
 #colorP1, #colorP2{
@@ -124,7 +124,7 @@ canvas{
     /* margin-bottom: 10px; */
     padding-bottom: 10px;
     bottom: 10px;
-    background-image: url(./images/sol.png)
+    /* background-image: url(./images/sol.png) */
 }
 .containScore{
     display: flex;
@@ -133,24 +133,44 @@ canvas{
     width: 625px;
 }
 
-.snowflake {
-    position: fixed;
-    background-color: #CCC;
-    user-select: none;
-    z-index: 1000;
-    pointer-events: none;
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
-}
-
 #loginForm{
     text-align: center;
-    background-color: red;
+    background-color: #f1c40f;
     margin-left: 10%; 
     margin-right: 10%; 
-    margin-top: 5%; 
+    margin-top: 10%; 
     margin-bottom: 5%; 
-    padding-bottom: 20%; 
-    padding-top: 20%; 
+    /* padding-bottom: 10%; 
+    padding-top: 10%;  */
+    padding-left: 35%;
+    padding-right: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 28px;
+}
+.singleColor{
+    width:35px;
+    height:35px;
+    border: 0.5px solid lightgray;
+    background-color: blue;
+}
+
+.formItem{
+    margin-top: 12%;
+    margin-bottom: 12%;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+#go{
+    background: #3498db;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    cursor: pointer;    
+    font-size: 50px;
+
+}
+#go:focus{
+    outline: none;
 }

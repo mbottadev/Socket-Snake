@@ -7,15 +7,36 @@
     <link rel="stylesheet" type="text/css" href="style.css"> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Raleway+Dots" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
     <script type="text/javascript" src="main.js"></script>
     <title>Document</title>
 </head>
     <body>
         <div id="form" class="deco">
             <form id="loginForm"> 
-                <label for="pseudo">Votre pseudo : </label>
-                <input maxlength="15" minlength="3" name="pseudo" type="text">
-                <button type="submit">Ready?</button>
+                <label for="pseudo" class="formItem">Votre pseudo : </label>
+                <input maxlength="15" minlength="3" name="pseudo" type="text" >
+                <table id="colorPicker" class="formItem">
+                    <tr>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                    </tr>
+                    <tr>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                    </tr>
+                    <tr>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                        <td class="singleColor"></td>
+                    </tr>
+                </table>
+                <button type="submit" class="formItem" id="go">GO</button>
             </form>
         </div>
         <div id="jeu" class="allPPage" style="visibility:hidden">
@@ -24,11 +45,13 @@
                 <p id="afficheWinner"></p>
                 <button id="restart" > Play Again?</button>
             </div>
+            <div id="timer">Start in : 3</div>
+            <div id="score"></div>
             <div class="containScore" id="color">
                 <h1 id="colorP1"></h1>
                 <h1 id="colorP2"></h1>
             </div>
-            <div class="containScore">
+            <div class="containScore" >
                 <h1 id="scoreP1"></h1>
                 <h1 id="scoreP2"></h1>
             </div>

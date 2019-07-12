@@ -1,6 +1,6 @@
 var express = require('express');
 var socket = require('socket.io')
-//App setup
+//App setu p
 
 var app = express();
 var server = app.listen(4002,function(){
@@ -23,7 +23,26 @@ var joueurs = []
 var joueursEnCours = []
 const cases = 28;
 
-let snakes;
+let endGame = false;
+let runningGame;
+let timeTillGame 
+let timer
+
+let startTimer = function(){
+    endGame = true
+    timeTillGame = 2
+    timer = setInterval(socketEmitTimer, 1000)
+}
+let socketEmitTimer = function(){
+    io.sockets.emit('timerTick',{
+        seconds : timeTillGame
+    })
+    if(timeTillGame <= 0 ){
+        clearInterval(timer)
+        endGame = false
+    }
+    timeTillGame--;
+}
 
 let pomme = {
             
@@ -181,43 +200,38 @@ io.on('connection',function(socket){
     console.log(socket.id)
     console.log('Made socket connection', socket.handshake.address);
     socket.on('ready',function(data){
-        if (joueurs.length == 1) {
-            var p2 = new infoJoueurs(1)
-            p2.pseudo = data.pseudo
-            p2.ip = socket.id
-            p2.color = data.color
-            p2.snake = new snake(1)
-            joueurs.push(p2)
-        }
-        if (joueurs.length == 0){
-            var p1 = new infoJoueurs(0)
-            p1.pseudo = data.pseudo
-            p1.ip = socket.id
-            p1.color = data.color
-            p1.snake = new snake(0)
-            joueurs.push(p1)
-        }
-        if (joueurs.length ==2){
+        let nbJoueurs = joueurs.length
+        let player = new infoJoueurs(nbJoueurs)
+        player.pseudo = data.pseudo
+        player.ip = socket.id
+        player.color = data.color
+        player.snake = new snake(nbJoueurs)
+        joueurs.push(player)
+
+        // nombre de joueur à changer ici--------------------------------------------------
+        if (joueurs.length == 2){
             io.sockets.emit('redirection',{
                 joueurs:joueurs,
                 pomme:pomme,
             })
             joueursEnCours.push(joueurs)
              //joueurs = []
-            setInterval(game,100);
-            
+            startTimer();
+            runningGame = setInterval(game,100);
         }
     })
 
-    let endGame = false;
+
 
     socket.on('restart',()=>{
-        endGame = false;
-        joueurs[1].snake = new snake(1)
-        joueurs[0].snake = new snake(0)
         io.sockets.emit('reset')
-
-        game()
+        endGame = false;
+        for(let i = 0; i< joueurs.length;i++){
+            joueurs[i].snake = new snake(i)
+        }
+        startTimer();
+        runningGame = setInterval(game,100);
+        // console.log("restart game : " + endGame + " at " + new Date())
     })
 
     socket.on('touche',function(data){
@@ -226,6 +240,7 @@ io.on('connection',function(socket){
     
     function game() {
         if(endGame !== true){
+            // console.log("game running : " + endGame + " at " + new Date())
 
             pomme.newApple()
             for(Id=0;Id<joueurs.length;Id++){
@@ -241,6 +256,7 @@ io.on('connection',function(socket){
                         winner:joueurs[Id]
                     })
                     endGame = true
+                    clearInterval(runningGame)
                     console.log("Someone Won")
                 }            
             }
@@ -248,7 +264,7 @@ io.on('connection',function(socket){
             io.sockets.emit('tick',{
                     joueurs:joueurs,
                     pomme:pomme,
-                })
+            })
         }
     }
 })

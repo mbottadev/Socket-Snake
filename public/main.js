@@ -1,4 +1,6 @@
-var socket = io.connect('10.70.0.56:4002');
+var socket = io.connect('192.168.2.191:4002');
+// ifconfig to know the ip adress--------------------
+// nodemon app to start server-----------------------
 // var socket = io();
 
 
@@ -6,15 +8,28 @@ var socket = io.connect('10.70.0.56:4002');
         // socket.on('test', (socket)=>{
         //     console.log(socket)
         // })
+        const colorChoice = ['#82b1ff','#032c70','#00ce4b','#0e7507','#85b20a','#ccff00','#ff9900','#ff3b00','#ff9e6d','#8c1616','#b5176b','#b121ff']
+        let colorPickerCells = document.getElementsByClassName("singleColor");
+        let timer = document.getElementById('timer');
         let form = document.getElementById("form");
         let jeu = document.getElementById("jeu");
         let loginForm = document.getElementById("loginForm");
-        let scoreP1 = document.getElementById("scoreP1");
-        let scoreP2 = document.getElementById("scoreP2");
-        let colorP1 = document.getElementById("colorP1");
-        let colorP2 = document.getElementById("colorP2");
+        let scoreContainer = document.getElementById("score");
         let myColor = ("rgb("+ Math.floor((Math.random()*215) + 40) + ","  + Math.floor((Math.random()*215) + 40) +","+ Math.floor((Math.random()*215) + 40)+")")
         console.log(myColor)
+
+        for (let i = 0; i < colorPickerCells.length;i++){
+            colorPickerCells[i].style.backgroundColor = colorChoice[i]
+            colorPickerCells[i].addEventListener("click", (e) =>{
+                myColor = colorChoice[i]
+                for(let j = 0; j<colorPickerCells.length;j++){
+                    colorPickerCells[j].style.border = "0.5px solid lightgray"
+                }
+                colorPickerCells[i].style.border = "1px solid black"
+            }
+            )
+        }
+
         let check = function(joueurs,socketId){
             if (socketId == joueurs[0].ip){
                 return joueurs[0]
@@ -43,12 +58,39 @@ var socket = io.connect('10.70.0.56:4002');
         let ennemi = {}
         let pomme = {}
         
+        let scoreContainerArray = []
 
         
         socket.on('redirection',function(data){
             form.parentNode.removeChild(form)
-            // contexte.fillStyle="black";
-            // contexte.fillRect(0,0,cadre.width,cadre.height);
+
+            console.log(data)
+            for(let i = 0; i< data.joueurs.length;i++){
+                let joueurContainer = document.createElement("div")
+                joueurContainer.class = "joueurContainer"
+                joueurContainer.id = "joueur" + i;
+                let joueurScore = document.createElement("p")
+                let joueurPseudo = document.createElement("p")
+
+                joueurScore.style.color = data.joueurs[i].color
+                joueurPseudo.style.color = data.joueurs[i].color
+
+                joueurContainer.appendChild(joueurPseudo)
+                joueurContainer.appendChild(joueurScore)
+
+                scoreContainerArray.push(joueurContainer)
+
+                joueurPseudo.innerText = data.joueurs[i].pseudo
+                joueurScore.innerText = data.joueurs[i].snake.queue - 1
+            }
+
+            for(let i = 0;i<scoreContainerArray.length;i++){
+                scoreContainer.appendChild(scoreContainerArray[i])
+                scoreContainer.children[i].children[1].innerText = data.joueurs[i].snake.queue - 1
+            }
+            console.log(scoreContainer)
+            contexte.fillStyle="black";
+            contexte.fillRect(0,0,cadre.width,cadre.height);
             jeu.style.visibility = "visible";  
             self = check(data.joueurs,socket.id)
             ennemi = checkEnnemi(data.joueurs,socket.id)
@@ -64,6 +106,14 @@ var socket = io.connect('10.70.0.56:4002');
             show(ennemi)
         })
         
+        socket.on('timerTick', (data)=>{
+            if(data.seconds>0){
+                timer.innerText = "Start in : " + data.seconds
+            }else{
+                timer.innerText =  "Fight !"                
+            }
+        })
+
         socket.on('tick',function(data){
             contexte.fillStyle="black";
             contexte.fillRect(0,0,cadre.width,cadre.height);
@@ -75,7 +125,10 @@ var socket = io.connect('10.70.0.56:4002');
             show(ennemi)
             scoreP1.innerText=self.snake.queue - 1
             scoreP2.innerText=ennemi.snake.queue - 1
-
+            for(let i = 0;i<scoreContainerArray.length;i++){
+                scoreContainerArray[i].children[1].textContent  = data.joueurs[i].snake.queue - 1
+                scoreContainer.appendChild(scoreContainerArray[i])
+            }
             // console.log(ennemi)
         })
 
@@ -113,10 +166,15 @@ var socket = io.connect('10.70.0.56:4002');
         });
         
         restart.addEventListener("click",()=>{
+            console.log("send restart")
+            timer.innerText = "Start in : 3" 
+
             socket.emit('restart')
         })
         socket.on('reset',()=>{
             afficheWinnerContainer.style.zIndex = -2
+            console.log("receive reset")
+
         })
         const cases = 28;
         
@@ -312,6 +370,15 @@ var socket = io.connect('10.70.0.56:4002');
         function setResetFlag(e) {
             resetPosition = true;
         }
+
+        var $button = document.querySelector('go');
+        $button.addEventListener('mouseover', function() {
+        var duration = 0.3,
+            delay = 0.08;
+        TweenMax.to($button, duration, {scaleY: 1.6, ease: Expo.easeOut});
+        TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
+        TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
+        });
 
     }
 
